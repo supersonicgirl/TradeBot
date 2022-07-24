@@ -42,25 +42,23 @@ def TillsonT3():
 
     df['T3Diff'] = df['T3'].diff()
 
-    SIGNAL_MESSAGE = ''
+    SIGNAL_MESSAGE = 'AAA'
+    print(SIGNAL_MESSAGE)
 
     if (df['T3Diff'][df.index[-2]] < 0 and df['T3Diff'][df.index[-1]] > 0):
         SIGNAL_MESSAGE = 'T3 BUY SIGNAL in '+ TIME_RANGE + ' for BTC price '+ "${:,.0f}".format(df['close'][df.index[-1]])
         sendSignal(SIGNAL_MESSAGE) 
+        print(SIGNAL_MESSAGE)
 
     elif (df['T3Diff'][df.index[-2]] > 0 and df['T3Diff'][df.index[-1]] < 0):
         SIGNAL_MESSAGE = 'T3 SELL SIGNAL in '+ TIME_RANGE + ' for BTC price '+ "${:,.0f}".format(df['close'][df.index[-1]])
         sendSignal(SIGNAL_MESSAGE)
+        print(SIGNAL_MESSAGE)
         
 
        
 
-schedule.every(900).seconds.do(TillsonT3)
-
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
-   
+TillsonT3()
 
 
 
